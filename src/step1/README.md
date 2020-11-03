@@ -2,7 +2,7 @@
 
 Every Azure Function binding is defined by an Attribute. The Attribute will contain all the parameters and configuration flags that you, as the author, want to expose to your consumers.
 
-For example, the `CosmosDBAttribute`, defines:
+For example, the `SFTPSSHAttribute`, defines:
 
     /// <summary>
     /// The name of the database to which the parameter applies.
@@ -19,7 +19,7 @@ For example, the `CosmosDBAttribute`, defines:
     public string ContainerName { get; private set; }
 
     /// <summary>
-    /// A string value indicating the app setting to use as the CosmosDB connection string.
+    /// A string value indicating the app setting to use as the SFTPSSH connection string.
     /// </summary>
     [ConnectionString]
     public string ConnectionStringSetting { get; set; }
@@ -38,4 +38,4 @@ Only **primitive types** should be used in the parameters and configurations def
 
 ## Actions on this step
 
-1. Change and define your own parameters and configurations in [CosmosDBAttribute.cs](./CosmosDBAttribute.cs).
+1. Change and define your own parameters and configurations in [SFTPSSHAttribute.cs](./SFTPSSHAttribute.cs).

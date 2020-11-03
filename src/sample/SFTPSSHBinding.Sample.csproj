@@ -8,7 +8,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\step5\CosmosDBBinding.Step5.csproj" />
+    <ProjectReference Include="..\step5\SFTPSSHBinding.Step5.csproj" />
   </ItemGroup>
 
   <ItemGroup>

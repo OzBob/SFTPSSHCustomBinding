@@ -1,25 +1,25 @@
 ﻿using System;
 using Microsoft.Azure.WebJobs.Description;
 
-namespace CosmosDBBinding.Step1
+namespace SFTPSSHBinding.Step1
 {
     [AttributeUsage(AttributeTargets.Parameter)]
     [Binding]
-    public class CosmosDBAttribute : Attribute
+    public class SFTPSSHAttribute : Attribute
     {
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
-        public CosmosDBAttribute()
+        public SFTPSSHAttribute()
         {
         }
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
-        /// <param name="databaseName">The CosmosDB database name.</param>
-        /// <param name="containerName">The CosmosDB container name.</param>
-        public CosmosDBAttribute(string databaseName, string containerName)
+        /// <param name="databaseName">The SFTPSSH database name.</param>
+        /// <param name="containerName">The SFTPSSH container name.</param>
+        public SFTPSSHAttribute(string databaseName, string containerName)
         {
             DatabaseName = databaseName;
             ContainerName = containerName;
@@ -47,7 +47,7 @@ namespace CosmosDBBinding.Step1
         public bool CreateIfNotExists { get; set; }
 
         /// <summary>
-        /// A string value indicating the app setting to use as the CosmosDB connection string.
+        /// A string value indicating the app setting to use as the SFTPSSH connection string.
         /// </summary>
         [ConnectionString]
         public string ConnectionStringSetting { get; set; }

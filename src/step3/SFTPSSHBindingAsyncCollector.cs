@@ -7,13 +7,13 @@ using Microsoft.Azure.WebJobs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace CosmosDBBinding.Step3
+namespace SFTPSSHBinding.Step3
 {
-    public class CosmosDBBindingAsyncCollector<T>: IAsyncCollector<T>
+    public class SFTPSSHBindingAsyncCollector<T>: IAsyncCollector<T>
     {
-        private CosmosDBBindingContext cosmosContext;
+        private SFTPSSHBindingContext cosmosContext;
 
-        public CosmosDBBindingAsyncCollector(CosmosDBBindingContext cosmosContext) => this.cosmosContext = cosmosContext;
+        public SFTPSSHBindingAsyncCollector(SFTPSSHBindingContext cosmosContext) => this.cosmosContext = cosmosContext;
 
         public async Task AddAsync(
             T item, 
@@ -38,7 +38,7 @@ namespace CosmosDBBinding.Step3
             return Task.FromResult(0);
         }
 
-        private static async Task InitializeContainer(CosmosDBBindingContext context)
+        private static async Task InitializeContainer(SFTPSSHBindingContext context)
         {
             DatabaseResponse databaseResponse = await context.CosmosClient.GetDatabase(context.ResolvedAttribute.DatabaseName).ReadAsync();
             if (databaseResponse.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -56,7 +56,7 @@ namespace CosmosDBBinding.Step3
             }
         }
 
-        private static async Task UpsertDocument(CosmosDBBindingContext context, T item)
+        private static async Task UpsertDocument(SFTPSSHBindingContext context, T item)
         {
             // DocumentClient does not accept strings directly.
             object convertedItem = item;

@@ -2,9 +2,9 @@ using System;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
 
-namespace CosmosDBBinding.Step2
+namespace SFTPSSHBinding.Step2
 {
-    public class CosmosDBBindingCollectorFactory : ICosmosDBBindingCollectorFactory
+    public class SFTPSSHBindingCollectorFactory : ISFTPSSHBindingCollectorFactory
     {
         public CosmosClient CreateClient(
             string connectionString,

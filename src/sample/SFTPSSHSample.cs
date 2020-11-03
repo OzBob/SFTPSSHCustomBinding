@@ -2,17 +2,17 @@ using System;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
-using CosmosDBBinding.Step1;
+using SFTPSSHBinding.Step1;
 using System.Threading.Tasks;
 
-namespace CosmosDBBinding.Sample
+namespace SFTPSSHBinding.Sample
 {
-    public static class CosmosDBSample
+    public static class SFTPSSHSample
     {
-        [FunctionName("CosmosDBSample")]
+        [FunctionName("SFTPSSHSample")]
         public static async Task Run(
             [TimerTrigger("*/5 * * * * *")]TimerInfo myTimer, 
-            [CosmosDB("%CosmosDBDatabase%", "%CosmosDBContainer%", ConnectionStringSetting = "CosmosDBConnectionString")] IAsyncCollector<MyClass> CosmosDBCollector,
+            [SFTPSSH("%SFTPSSHDatabase%", "%SFTPSSHContainer%", ConnectionStringSetting = "SFTPSSHConnectionString")] IAsyncCollector<MyClass> SFTPSSHCollector,
             ILogger log)
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
@@ -25,7 +25,7 @@ namespace CosmosDBBinding.Sample
             };
 
             // Send it to the collector
-            await CosmosDBCollector.AddAsync(item);
+            await SFTPSSHCollector.AddAsync(item);
         }
     }
 

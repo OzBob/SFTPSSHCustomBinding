@@ -5,6 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\step4\CosmosDBBinding.Step4.csproj" />
+    <ProjectReference Include="..\step3\SFTPSSHBinding.Step3.csproj" />
   </ItemGroup>
 </Project>

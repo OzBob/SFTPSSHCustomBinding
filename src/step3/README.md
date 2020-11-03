@@ -18,5 +18,5 @@ You can implement them in your own custom way, depending on how your connector o
 
 ## Actions on this step
 
-1. Define a [Context](./CosmosDBBindingContext.cs), it should contain both a reference to your Attribute and a reference to an instance of your connector or service. We will see [how this Context is created in the next step](../step4/README.md).
-2. Define your own implementation of `AsyncCollector<T>`, like [CosmosDBBindingAsyncCollector](./CosmosDBBindingAsyncCollector.cs). Your Collector will be receiving a Context on the constructor that can be used in `AddAsync` and/or `FlushAsync`.
+1. Define a [Context](./SFTPSSHBindingContext.cs), it should contain both a reference to your Attribute and a reference to an instance of your connector or service. We will see [how this Context is created in the next step](../step4/README.md).
+2. Define your own implementation of `AsyncCollector<T>`, like [SFTPSSHBindingAsyncCollector](./SFTPSSHBindingAsyncCollector.cs). Your Collector will be receiving a Context on the constructor that can be used in `AddAsync` and/or `FlushAsync`.

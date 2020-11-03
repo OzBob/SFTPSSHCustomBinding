@@ -1,9 +1,9 @@
 using System;
 using Microsoft.Azure.Cosmos;
 
-namespace CosmosDBBinding.Step2
+namespace SFTPSSHBinding.Step2
 {
-    public interface ICosmosDBBindingCollectorFactory
+    public interface ISFTPSSHBindingCollectorFactory
     {
         CosmosClient CreateClient(
             string connectionString,

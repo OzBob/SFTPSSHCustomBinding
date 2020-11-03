@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using CosmosDBBinding.Step1;
-using CosmosDBBinding.Step2;
-using CosmosDBBinding.Step3;
+using SFTPSSHBinding.Step1;
+using SFTPSSHBinding.Step2;
+using SFTPSSHBinding.Step3;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Description;
@@ -11,16 +11,16 @@ using Microsoft.Azure.WebJobs.Host.Bindings;
 using Microsoft.Azure.WebJobs.Host.Config;
 using Microsoft.Extensions.Configuration;
 
-namespace CosmosDBBinding.Step4
+namespace SFTPSSHBinding.Step4
 {
-    [Extension("CosmosDBV3")]
-    public class CosmosDBBindingConfigProvider : IExtensionConfigProvider
+    [Extension("SFTPSSHV3")]
+    public class SFTPSSHBindingConfigProvider : IExtensionConfigProvider
     {
-        private readonly ICosmosDBBindingCollectorFactory cosmosBindingCollectorFactory;
+        private readonly ISFTPSSHBindingCollectorFactory cosmosBindingCollectorFactory;
 
         private ConcurrentDictionary<string, CosmosClient> CollectorCache { get; } = new ConcurrentDictionary<string, CosmosClient>();
 
-        public CosmosDBBindingConfigProvider(ICosmosDBBindingCollectorFactory cosmosBindingCollectorFactory)
+        public SFTPSSHBindingConfigProvider(ISFTPSSHBindingCollectorFactory cosmosBindingCollectorFactory)
         {
             this.cosmosBindingCollectorFactory = cosmosBindingCollectorFactory;
         }
@@ -32,16 +32,16 @@ namespace CosmosDBBinding.Step4
                 throw new ArgumentNullException("context");
             }
 
-            var rule = context.AddBindingRule<CosmosDBAttribute>();
+            var rule = context.AddBindingRule<SFTPSSHAttribute>();
             rule.AddValidator(ValidateConnection);
-            rule.BindToCollector<CosmosDBBindingOpenType>(typeof(CosmosDBBindingConverter<>), this);
+            rule.BindToCollector<SFTPSSHBindingOpenType>(typeof(SFTPSSHBindingConverter<>), this);
         }
 
-        internal CosmosDBBindingContext CreateContext(CosmosDBAttribute attribute)
+        internal SFTPSSHBindingContext CreateContext(SFTPSSHAttribute attribute)
         {
             CosmosClient client = GetService(attribute.ConnectionStringSetting, attribute.CurrentRegion);
 
-            return new CosmosDBBindingContext
+            return new SFTPSSHBindingContext
             {
                 CosmosClient = client,
                 ResolvedAttribute = attribute,
@@ -54,19 +54,19 @@ namespace CosmosDBBinding.Step4
             return CollectorCache.GetOrAdd(cacheKey, (c) => this.cosmosBindingCollectorFactory.CreateClient(connectionString, region));
         }
 
-        internal void ValidateConnection(CosmosDBAttribute attribute, Type paramType)
+        internal void ValidateConnection(SFTPSSHAttribute attribute, Type paramType)
         {
             if (string.IsNullOrEmpty(attribute.ConnectionStringSetting))
             {
-                string attributeProperty = $"{nameof(CosmosDBAttribute)}.{nameof(CosmosDBAttribute.ConnectionStringSetting)}";
+                string attributeProperty = $"{nameof(SFTPSSHAttribute)}.{nameof(SFTPSSHAttribute.ConnectionStringSetting)}";
                 throw new InvalidOperationException(
-                    $"The CosmosDB connection string must be set via the {attributeProperty} property.");
+                    $"The SFTPSSH connection string must be set via the {attributeProperty} property.");
             }
         }
 
         private static string BuildCacheKey(string connectionString, string region) => $"{connectionString}|{region}";
 
-        private class CosmosDBBindingOpenType : OpenType.Poco
+        private class SFTPSSHBindingOpenType : OpenType.Poco
         {
             public override bool IsMatch(Type type, OpenTypeMatchContext context)
             {
